@@ -1,24 +1,27 @@
-import logo from './logo.svg';
+
 import './App.css';
 
-function App() {
+import { Route, Routes } from 'react-router-dom';
+import { useState } from 'react'
+import Header from './components/Header';
+import Footer from './components/Footer';
+import TasksWrapper from './components/TasksWrapper';
+
+import About from './components/About';
+
+const App = () => {
+  const [showAddButton, setshowAddButton] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header onAdd={() => { setshowAddButton(!showAddButton) }} showAdd={showAddButton} />
+      <Routes>
+        <Route path='/' element={<TasksWrapper showButton={showAddButton} />} />
+        <Route path='/about' element={<About />} />
+      </Routes>
+      <Footer />
     </div>
+
   );
 }
 
